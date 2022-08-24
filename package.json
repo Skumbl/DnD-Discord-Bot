@@ -1,0 +1,25 @@
+{
+  "name": "hermod-bot",
+  "version": "1.0.0",
+  "description": "DnD Discord Attendence Manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Skumbl/Hermod-Bot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Skumbl/Hermod-Bot/issues"
+  },
+  "homepage": "https://github.com/Skumbl/Hermod-Bot#readme",
+  "dependencies": {
+    "discord.js": "^14.3.0",
+    "dotenv": "^16.0.1",
+    "nodemon": "^2.0.19"
+  }
+}
