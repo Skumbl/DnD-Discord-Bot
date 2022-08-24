@@ -1,0 +1,11 @@
+Things that need to be done -
+
+set up ENV
+
+set up command handler
+set up slash commands
+
+set up attendance commands
+set up current attence
+set up appointment attendance
+set up time system
