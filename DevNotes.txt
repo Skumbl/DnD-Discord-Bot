@@ -1,6 +1,6 @@
 Things that need to be done -
 
-set up ENV
+X set up ENV
 
 set up command handler
 set up slash commands
