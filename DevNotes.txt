@@ -3,7 +3,7 @@ Things that need to be done -
 X set up ENV
 
 set up command handler
-set up slash commands
+X set up slash commands
 
 set up attendance commands
 set up current attence
