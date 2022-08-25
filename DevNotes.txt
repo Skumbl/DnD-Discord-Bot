@@ -2,9 +2,10 @@ Things that need to be done -
 
 X set up ENV
 
-set up command handler
+X set up command handler
 X set up slash commands
-
+  set up event handler 
+  
 set up attendance commands
 set up current attence
 set up appointment attendance
