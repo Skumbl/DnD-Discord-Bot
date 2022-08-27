@@ -22,24 +22,15 @@ module.exports = {
         )
         .addIntegerOption((option) =>
             option.setName('hour')
-                .setDescription('hour')
+                .setDescription('hour in 24 hour format')
                 .setRequired(true)
-                .setMaxValue(11)
+                .setMaxValue(23)
         )
         .addIntegerOption((option) => 
             option.setName('minute')
                 .setDescription('minute')
                 .setRequired(true)
                 .setMaxValue(59)
-        )
-        .addIntegerOption((option) =>
-            option.setName('meridiem')
-                .setDescription('AM or PM?')
-                .setRequired(true)
-                .addChoices(
-                    {name: 'AM', value: 0},
-                    {name: 'PM', value: 1}
-                )
         ),
                     
 
@@ -47,13 +38,6 @@ module.exports = {
         const { options } = interation;
         let hour = options.getInteger('hour');
         let minute = options.getInteger('minute');
-        let meridiem = options.getInteger('meridiem');
-
-        //check to see if time entered is AM or PM
-        if ( meridiem == 1)
-        {
-            hour += 12;
-        }
 
         // cron.schedule(`${SESH_MIN} ${SESH_HOUR} * * ${SESH_DAY}`, () => {
         //     console.log('ping players');
