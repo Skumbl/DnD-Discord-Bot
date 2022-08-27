@@ -25,41 +25,55 @@ module.exports = {
             option.setName('time')
                 .setDescription('whole number for time of session')
                 .setRequired(true)  
+        )
+        .addIntegerOption((option) =>
+            option.setName('meridiem')
+                .setDescription('AM or PM?')
+                .setRequired(true)
+                .addChoices(
+                    {name: 'AM', value: 0},
+                    {name: 'PM', value: 1}
+                )
         ),
                     
 
     async execute(interation) {
         const { options } = interation;
         SESH_DAY = options.getInteger('day');
-        const time = options.getInteger('time')
+        let time = options.getInteger('time')
+        const meridiem = options.getInteger('meridiem');
+        if ( meridiem == 1)
+        {
+            time += 12;
+        }
         switch(options.getInteger('day'))
         {
             case 0: {
-                await interation.reply (`Session set for Sunday at ${time}`);
+                await interation.reply (`Session set for Sunday at ${time}:00`);
                 break;
             }
             case 1: {
-                await interation.reply (`Session set for Monday at ${time}`);       
+                await interation.reply (`Session set for Monday at ${time}:00`);       
                 break;  
             }
             case 2: {
-                await interation.reply (`Session set for Tuesday at ${time}`);
+                await interation.reply (`Session set for Tuesday at ${time}:00`);
                 break;
             }
             case 3: {
-                await interation.reply (`Session set for Wednesday at ${time}`);
+                await interation.reply (`Session set for Wednesday at ${time}:00`);
                 break;
             }
             case 4: {
-                await interation.reply (`Session set for Thursday at ${time}`);
+                await interation.reply (`Session set for Thursday at ${time}:00`);
                 break;
             }
             case 5: {
-                await interation.reply (`Session set for Friday at ${time}`);
+                await interation.reply (`Session set for Friday at ${time}:00`);
                 break;
             }
             case 6: {
-                await interation.reply (`Session set for Saturday at ${time}`);
+                await interation.reply (`Session set for Saturday at ${time}:00`);
                 break;
             }
         }
