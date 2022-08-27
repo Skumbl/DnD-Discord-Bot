@@ -7,6 +7,7 @@ const token = process.env.TOKEN;
 const clientId = process.env.ClientId;
 const guildId = process.env.GuildId;
 
+
 const client = new Client({ 
         intents: [
             GatewayIntentBits.Guilds,

@@ -1,8 +1,7 @@
 const {SlashCommandBuilder} = require('discord.js');
+const cron = require('node-cron');
 
-let SESH_DAY = 0;
-let SESH_TIME = 0;
-
+//command to set the date and time of a session
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('set_session')
@@ -22,10 +21,16 @@ module.exports = {
                 )
         )
         .addIntegerOption((option) =>
-            option.setName('time')
-                .setDescription('whole number for time of session')
+            option.setName('hour')
+                .setDescription('hour')
                 .setRequired(true)
                 .setMaxValue(11)
+        )
+        .addIntegerOption((option) => 
+            option.setName('minute')
+                .setDescription('minute')
+                .setRequired(true)
+                .setMaxValue(59)
         )
         .addIntegerOption((option) =>
             option.setName('meridiem')
@@ -40,46 +45,54 @@ module.exports = {
 
     async execute(interation) {
         const { options } = interation;
-        SESH_DAY = options.getInteger('day');
-        let time = options.getInteger('time')
-        const meridiem = options.getInteger('meridiem');
+        let hour = options.getInteger('hour');
+        let minute = options.getInteger('minute');
+        let meridiem = options.getInteger('meridiem');
+
+        //check to see if time entered is AM or PM
         if ( meridiem == 1)
         {
-            time += 12;
+            hour += 12;
         }
+
+        // cron.schedule(`${SESH_MIN} ${SESH_HOUR} * * ${SESH_DAY}`, () => {
+        //     console.log('ping players');
+        // });
+        cron.schedule(`* * * * *`, () => {
+            console.log('ping players');
+        });
+
+        //print session conformation
         switch(options.getInteger('day'))
         {
             case 0: {
-                await interation.reply (`Session set for Sunday at ${time}:00`);
+                await interation.reply (`Session set for Sunday at ${hour}:${minute}`);
                 break;
             }
             case 1: {
-                await interation.reply (`Session set for Monday at ${time}:00`);       
+                await interation.reply (`Session set for Monday at ${hour}:${minute}`);       
                 break;  
             }
             case 2: {
-                await interation.reply (`Session set for Tuesday at ${time}:00`);
+                await interation.reply (`Session set for Tuesday at ${hour}:${minute}`);
                 break;
             }
             case 3: {
-                await interation.reply (`Session set for Wednesday at ${time}:00`);
+                await interation.reply (`Session set for Wednesday at ${hour}:${minute}`);
                 break;
             }
             case 4: {
-                await interation.reply (`Session set for Thursday at ${time}:00`);
+                await interation.reply (`Session set for Thursday at ${hour}:${minute}`);
                 break;
             }
             case 5: {
-                await interation.reply (`Session set for Friday at ${time}:00`);
+                await interation.reply (`Session set for Friday at ${hour}:${minute}`);
                 break;
             }
             case 6: {
-                await interation.reply (`Session set for Saturday at ${time}:00`);
+                await interation.reply (`Session set for Saturday at ${hour}:${minute}`);
                 break;
             }
         }
     }
 };
-
-module.exports.SESH_DAY = SESH_DAY;
-module.exports.SESH_TIME = SESH_TIME;
