@@ -24,7 +24,8 @@ module.exports = {
         .addIntegerOption((option) =>
             option.setName('time')
                 .setDescription('whole number for time of session')
-                .setRequired(true)  
+                .setRequired(true)
+                .setMaxValue(11)
         )
         .addIntegerOption((option) =>
             option.setName('meridiem')
