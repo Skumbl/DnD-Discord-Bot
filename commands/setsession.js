@@ -1,5 +1,7 @@
 const {SlashCommandBuilder} = require('discord.js');
 const cron = require('node-cron');
+require('dotenv');
+const channelId = process.env.ChannelId;
 
 //command to set the date and time of a session
 module.exports = {
@@ -31,23 +33,28 @@ module.exports = {
                 .setDescription('minute')
                 .setRequired(true)
                 .setMaxValue(59)
-        ),
-                    
+        )
+        .addRoleOption((option) =>
+            option.setName('role')
+                .setDescription('role')
+                .setRequired(true)
+        ),            
 
     async execute(interation) {
         const { options } = interation;
         let hour = options.getInteger('hour');
         let minute = options.getInteger('minute');
+        let day = options.getInteger('day');
+        let role = options.getRole('role');
 
-        // cron.schedule(`${SESH_MIN} ${SESH_HOUR} * * ${SESH_DAY}`, () => {
-        //     console.log('ping players');
-        // });
-        cron.schedule(`* * * * *`, () => {
-            console.log('ping players');
+        const clinet = require('../index');
+
+        cron.schedule(`${minute} ${hour} * * ${day}`, () => {
+            clinet.client.cache.get(channelId).send(`${role} the game is affot`);
         });
 
         //print session conformation
-        switch(options.getInteger('day'))
+        switch(day)
         {
             case 0: {
                 await interation.reply (`Session set for Sunday at ${hour}:${minute}`);
